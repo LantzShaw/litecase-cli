@@ -1,0 +1,34 @@
+{
+  "name": "litecase-cli",
+  "version": "1.0.0",
+  "description": "Create scaffold for react application",
+  "main": "index.js",
+  "bin": {
+    "litecase": "bin/index.js"
+  },
+  "files": [
+    "bin/",
+    "lib/"
+  ],
+  "scripts": {
+    "litecase": "litecase",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/LantzShaw/litecase-cli.git"
+  },
+  "author": "Lantz(lantzshaw@163.com)",
+  "license": "MIT",
+  "dependencies": {
+    "boxen": "^6.2.1",
+    "chalk": "^5.0.0",
+    "commander": "^8.3.0",
+    "download-git-repo": "^3.0.2",
+    "fs-extra": "^10.0.0",
+    "inquirer": "^8.2.0",
+    "ora": "^6.0.1",
+    "rimraf": "^3.0.2",
+    "update-notifier": "^5.1.0"
+  }
+}
