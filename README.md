@@ -1,6 +1,11 @@
 # litecase-cli
 
-### 本地安装
+## install
 ```sh
-    npm link litecase-cli 
+$ npm install litecase-cli
+```
+
+## usage
+```sh
+    litecase --help
 ```

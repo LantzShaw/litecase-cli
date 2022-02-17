@@ -21,13 +21,13 @@
   "author": "Lantz(lantzshaw@163.com)",
   "license": "MIT",
   "dependencies": {
-    "boxen": "^6.2.1",
-    "chalk": "^5.0.0",
+    "boxen": "^5.1.2",
+    "chalk": "^4.1.2",
     "commander": "^8.3.0",
     "download-git-repo": "^3.0.2",
     "fs-extra": "^10.0.0",
     "inquirer": "^8.2.0",
-    "ora": "^6.0.1",
+    "ora": "^5.4.1",
     "rimraf": "^3.0.2",
     "update-notifier": "^5.1.0"
   }
