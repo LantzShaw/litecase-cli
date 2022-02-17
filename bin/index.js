@@ -6,7 +6,7 @@
 
 const program = require('commander')
 const inquirer = require('inquirer')
-const chalk = require('chalk')
+import chalk from 'chalk'
 const pkg = require('../package.json')
 const CliUtil = require('../lib/util.js')
 const util = new CliUtil(program)
