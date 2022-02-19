@@ -1,4 +1,5 @@
 #!/usr/bin/env node
+// 添加了这句话后，package.jsonr的bin里就不要写node了
 
 // Commander是一个轻量级，富有表现力，以及用于强大的命令行框架的node.js
 
@@ -6,10 +7,11 @@
 
 const program = require('commander')
 const inquirer = require('inquirer')
-// import chalk from 'chalk'
 const chalk = require('chalk')
+
 const pkg = require('../package.json')
 const CliUtil = require('../lib/util.js')
+
 const util = new CliUtil(program)
 
 if (process.argv.slice(2).join('') === '-v') {
@@ -28,6 +30,7 @@ program
     console.log(chalk.gray('  # create a new react project'))
     console.log('  $ litecase create demo')
     console.log()
+    console.log('This text is for tesing!')
   })
 
 program
@@ -40,19 +43,19 @@ program
 program
   .command('create')
   .description('generate a new project from a template')
-  .action(appName => {
+  .action(() => {
     util.initializing(pkg)
-    // const appName = program.args[0];
-    if (typeof appName === 'string') {
-      util.checkAppName(appName)
-    } else {
-      const opts = [
+
+    const appName = program.args[1]
+
+    if (typeof appName !== 'string') {
+      const nameOptions = [
         {
           type: 'input',
-          name: 'appName',
+          name: 'name',
           message: 'Please enter the app name for your project：',
-          validate: appName => {
-            if (!appName) {
+          validate: name => {
+            if (!name) {
               return '⚠️  app name must not be null！'
             }
             return true
@@ -60,119 +63,14 @@ program
         },
       ]
 
-      inquirer.prompt(opts).then(({ appName }) => {
-        if (appName) {
-          util.checkAppName(appName)
+      inquirer.prompt(nameOptions).then(({ name }) => {
+        if (name) {
+          generateOptions(name)
         }
       })
+    } else {
+      generateOptions(appName)
     }
-  })
-
-program
-  .command('check')
-  .description('check test')
-  .action((checkname, option) => {
-    // 获得了参数，可以在这里做响应的业务处理
-    const opts = [
-      {
-        type: 'input',
-        message: '姓名',
-        name: 'name',
-      },
-      {
-        type: 'input',
-        message: '手机号',
-        name: 'phone',
-        validate: val => {
-          if (val.match(/\d{11}/g)) {
-            return true
-          }
-          return '请输入11位数字'
-        },
-      },
-      {
-        type: 'confirm',
-        message: '是否参加本次考核？',
-        name: 'assess',
-      },
-      {
-        type: 'confirm',
-        message: '是否同意本次考核须知？',
-        name: 'notice',
-        when: answers => {
-          return answers.assess
-        },
-      },
-      {
-        type: 'list',
-        message: '欢迎来到本次考核，请选择语言：',
-        name: 'eductionBg',
-        choices: ['js', 'java', 'php'],
-        filter: val => {
-          // 将选择的内容后面加语言
-          return val + '语言'
-        },
-      },
-      {
-        type: 'rawlist',
-        message: '请选择你喜欢逛的社区：',
-        name: 'game',
-        choices: ['掘金', 'github'],
-      },
-      {
-        type: 'expand',
-        message: '请选择你喜欢的水果：',
-        name: 'fruit',
-        choices: [
-          {
-            key: 'a',
-            name: 'Apple',
-            value: 'apple',
-          },
-          {
-            key: 'O',
-            name: 'Orange',
-            value: 'orange',
-          },
-          {
-            key: 'p',
-            name: 'Pear',
-            value: 'pear',
-          },
-        ],
-      },
-      {
-        type: 'checkbox',
-        message: '请选择你喜欢的颜色：',
-        name: 'color',
-        choices: [
-          {
-            name: 'red',
-          },
-          new inquirer.Separator(), // 添加分隔符
-          {
-            name: 'blur',
-            checked: true, // 默认选中
-          },
-          {
-            name: 'green',
-          },
-          new inquirer.Separator('--- 分隔符 ---'), // 自定义分隔符
-          {
-            name: 'yellow',
-          },
-        ],
-      },
-      {
-        type: 'password',
-        message: '请输入你的密码：',
-        name: 'pwd',
-      },
-    ]
-
-    inquirer.prompt(opts).then(answers => {
-      console.log(answers)
-    })
   })
 
 /**
@@ -180,12 +78,50 @@ program
  */
 program.on('command:*', function () {
   console.error('Invalid command: %s\n', program.args.join(' '))
+
   program.help()
+
   process.exit(1)
 })
 
-function help() {
+const help = () => {
   program.parse(process.argv) // 解析
+
   if (program.args.length < 1) return program.help()
 }
+
+/**
+ * 构建选项
+ * @param {String} appName
+ */
+const generateOptions = appName => {
+  const templateOptions = [
+    {
+      type: 'list',
+      message: 'Choose your template:',
+      name: 'template',
+      choices: ['react', 'vue', 'weapp'],
+    },
+  ]
+
+  inquirer.prompt(templateOptions).then(({ template }) => {
+    if (template !== 'weapp') {
+      const languageOptions = [
+        {
+          type: 'list',
+          message: 'Choose language you want to use:',
+          name: 'language',
+          choices: ['JavaScript', 'TypeScript'],
+        },
+      ]
+
+      inquirer.prompt(languageOptions).then(({ language }) => {
+        util.checkAppName(appName, template, language)
+      })
+    } else {
+      util.checkAppName(appName, template, '')
+    }
+  })
+}
+
 help()

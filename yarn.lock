@@ -872,20 +872,6 @@
   dependencies:
     "package-json" "^6.3.0"
 
-"litecase-cli@file:../../../../../usr/local/lib/node_modules/litecase-cli":
-  "resolved" "file:../../../../../usr/local/lib/node_modules/litecase-cli"
-  "version" "1.0.1"
-  dependencies:
-    "boxen" "^6.2.1"
-    "chalk" "^5.0.0"
-    "commander" "^8.3.0"
-    "download-git-repo" "^3.0.2"
-    "fs-extra" "^10.0.0"
-    "inquirer" "^8.2.0"
-    "ora" "^6.0.1"
-    "rimraf" "^3.0.2"
-    "update-notifier" "^5.1.0"
-
 "lodash@^4.17.21":
   "integrity" "sha512-v2kDEe57lecTulaDIuNTPy3Ry4gLGJ6Z1O3vE1krgXZNrsQ+LFTGHVxVjcXPs17LhbZVGedAJv8XZ1tvj5FvSg=="
   "resolved" "https://registry.npmjs.org/lodash/-/lodash-4.17.21.tgz"
