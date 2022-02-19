@@ -18,8 +18,13 @@
     "type": "git",
     "url": "https://github.com/LantzShaw/litecase-cli.git"
   },
-  "author": "Lantz(lantzshaw@163.com)",
+  "author": "Lantz<lantzshaw@163.com>",
   "license": "MIT",
+  "contributors": [{
+    "name": "Lantz",
+    "email": "lantzshaw@163.com",
+    "url": "http://www.litecase.cn"
+  }],
   "dependencies": {
     "boxen": "^5.1.2",
     "chalk": "^4.1.2",

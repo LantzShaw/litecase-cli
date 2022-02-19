@@ -152,7 +152,26 @@ npm login
 npm version patch |  | major
 
 npm publish
+
+
 ```
+**peerDependencies**
+Example1:
+```sh
+假如myProject依赖pluginA，而pluginA中设置了peerDependencies，这时，在peerDependencies中的依赖就不会出现在pluginA目录下的node_modules中，而是，在myProject安装pluginA时，会提醒使用者，也需要安装pluginA中peerDependencies中的依赖，为什么可以这样，原因是：pluginA的目录下如果没找到node_modules，则会往父级找node_modules
+
+
+所以说，开发pluginA时，`npm i` 也不会把peerDependencies中的依赖不会安装进去
+```
+
+
+Vue 开发插件、组件可以通过`vue init webpack [app-name]` or `vue init webpack-simple [app-name]`，前提要全局安装@vue/init
+> https://www.jianshu.com/p/9177fd988558
+
+React 如何开发组件 插件
+
+
+npm link 和 peerDependencies 的问题可以参考 https://www.jianshu.com/p/dcbc81e7bf01
 
 ### 注意事项
 
