@@ -20,6 +20,10 @@
   },
   "author": "Lantz<lantzshaw@163.com>",
   "license": "MIT",
+  "keywords": [
+    "node",
+    "cli"
+  ],
   "contributors": [{
     "name": "Lantz",
     "email": "lantzshaw@163.com",
